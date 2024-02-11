@@ -1,0 +1,23 @@
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXX   XXXX   XXXXX  X   XXXXXX|
+|X X    XX     XXX   X     XXXX|
+|X      X       X           X X|
+|X                            X|
+|X             $              X|
+|X                            X|
+|XXXXXXXXXXXXXXXXXXXX    $    X|
+||||||||||||||||XXXXXXX     XXX|
+|||||||||XXXXXXXXXXX         XX|
+|||XXXXXXXX                   X|
+||XXX             XXXXXXXX    X|
+|XXX           XXX|||XXX$  %  X|
+|XX   $    XXXXX||||||XXXXXXXXX|
+|XX        XXXXXX|||||||||||||||
+|XX        XXXX|||||||||||||||||
+|XX    $     XXXXXXXXXXXXXXXXXX|
+|X               XXXXXXXXXXXXXX|
+|XXXXXX             XXX $$ XXXX|
+|XXXXXXXXXXXXX      XXX   %  XX|
+|XXX                XXXXXXXXXXX|
+|X      XXXXXXXXXXXXXXXXXXXXXXX|
+|X

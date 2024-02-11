@@ -43,27 +43,23 @@ class Entity(pygame.sprite.Sprite):
             self.rect.y += self.velocity_y
             self.velocity_y += self.gravity
 
-        # OR gate for whether or not collision checks should be
+        # OR gate for simple/fast collision detection
         self.vertcol = False
         self.horcol = False
         self.collision_detected = self.vertcol or self.horcol
 
-        # Clever or a waste? 
-        # for each visible entity, iterate thru all visible chunks
-        # and only check collision if the entity and chunk are
-        # some squared distance apart
+        # loop thru visible chunks, only check collision if chunk is within squared distance
         for chunk in chunks:
             if not self.collision_detected:
                 if distance(self.rect.x, self.rect.y, chunk.rect.x, chunk.rect.y) < 2500:
                     self.check_collision_vert(chunk)
                     self.check_collision_hori(chunk)
-
-            if self.collision_detected:
-                break  # Break if a collision is detected
+            else:
+                break
 
     def check_collision_vert(self, sprite):
         """ Vertical Collisions """
-        if self.rect.colliderect(sprite.rect):
+        if self.rect.colliderect(sprite.rect): # not sure how heavy this function is
             # Landing on top of a chunk
             if self.velocity_y > 0 and self.rect.bottom > sprite.rect.top:
                 projected_bottom = self.rect.bottom + self.velocity_y * 2.5 # still clipped thru when falling fast enough
@@ -86,13 +82,13 @@ class Entity(pygame.sprite.Sprite):
     def check_collision_hori(self, sprite):
         """ Horizontal Collisions """
         if self.rect.colliderect(sprite.rect):
-            # Moving right towards a chunk
+            # <entity> --> [chunk]
             if self.rect.right > sprite.rect.left and self.rect.left < sprite.rect.left:
                 overlap = self.rect.right - sprite.rect.left
                 self.rect.x -= overlap
                 self.reflectx = True
                 self.horcol = True
-            # Moving left towards a chunk
+            # [chunk] <-- <entity>
             if self.rect.left < sprite.rect.right and self.rect.right > sprite.rect.right:
                 overlap = sprite.rect.right - self.rect.left
                 self.rect.x += overlap

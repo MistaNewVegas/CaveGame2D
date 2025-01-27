@@ -8,6 +8,8 @@ Install Pygame
 python -m pip install pygame
 ```
 
+run main.py
+
 
 
 # Features

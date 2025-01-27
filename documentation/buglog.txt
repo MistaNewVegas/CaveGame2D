@@ -1,0 +1,56 @@
+1. CLIPPING
+
+    Holy moly, this made the project take 2x as long as it should have.
+
+    1.1: clipping through corners, clipping on corners
+
+    Problem:
+        
+        Earlier, all entities shared the same update function - including the player.
+        while this works... fine for enemies, food and bombs, the player moves much faster
+        and is smart enough (you, the player) to try to break the game via button mashing.
+
+        The entity collision function checked for either x or y collision, and broke 
+        when either was detected, so a player walking into a corner would be kind of 
+        bounced into place by the two each frame.
+
+        This sucked, so hard in fact that going OOB was as simple as holding the spacebar 
+        while walking into a wall.
+
+    Solution:
+        Rewriting collisions 100x, checking flags 1000x, etc etc before finally caving 
+        to the idea of splitting vertical and horizontal checks, and calling them in 
+        the Player update function instead of using general entity update.
+
+    The Problem with the Solution:
+        Gliding, player could still clip if velocity_y was high enough 
+        (I totally forgot to cap it until too late)
+
+    The Solution for the Problem caused by the Solution:
+        More flags, capping velocity_y
+
+    The current state:
+        Appears to be totally fixed and stable - I have yet to break it, will update this journal when I do
+
+2. OPTIMIZATION
+
+    Holy Moly x2, there are a lot of things going on here
+
+    2.1 Visible Chunks
+        Spent way too long figuring out how to make it so that only chunks on screen are rendered/updated/etc.
+
+        These chunks are passed down to the update functions, which filters them further if needed
+
+        frozen chunks/entities are revived as soon as they come within bounds
+
+    2.2 Distance(squared)
+        I came up with this idea on the toilet, I have been unable to prove its 
+        effectiveness, but its too cool to not include
+
+        The update function is heavy, even if there is no collision detected chunks are
+        being passed through some of it, so I made it so that only chunks within a certain
+        distance are checked, the function is defined at the top of the program. 
+
+Note: I totally forgot to keep updating this while wrapping up the project
+      if you have any questions about anything related to the program, feel free
+      to send me an email at biel.daniel@outlook.com

@@ -1,0 +1,98 @@
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                  % XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXX                    XXXXXX|
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXX  $X|X       XXX|  XX   X%X X|
+|X|X X    X%X X  XXX  X X%X   X  |
+||XXX   XXX |XXX$XXX  X X X   X  |
+|   | XX   | |X| XXX  X X X   X% |
+| X XX %  X XX| X  XXX   X X XXX |
+| XXXX| X||X|XX$XXXX  |X X      $|
+|X  X X   X XXXXX|XX XXX||   XX X|
+|X|X  XX  X XX X XXX  %XX   X X|X|
+||  X|% X|X |XX X XX$XXX%  |$XX X|
+|X  XXX  X X XX%XXX |XXXX  %   %X|
+|XX  |X| % | X$X  XXXXXXXX  XX %X|
+|X| X| XXX XXX   |XXXXXXXX$ XX $X|
+| X%XX XX |XX|  XXX  XXXX|  | $ X|
+||| X XX|XXXX%  XXXX | X X       |
+| X |X XXX XX  X  XXXXXXXX  XX $X|
+| XX|X X|XX  X  X XX XXX     XX X|
+|XX X XX X XX XXXXXX   X|X  |||  |
+|X XX    $X XXXXXXX  XXXX    $| X|
+|XX |XX | X XX XX XX XXX  $  XX X|
+|XXXX $ | XXX X X  XXX   X X XXX |
+|XXX| XX  X  X  %XXX|% XX | X|X X|
+||%X X XXX  X X| XXX%|X X X   X %|
+|XX | X$$XXX|X X|XXX   XX $ X X X|
+| XX XXXXX   XX  XXX XX XX|XX|XXX|
+|X   X X X | X X  XXXXXXXX  XX  X|
+|XX$||XXX   XXX X  XXX  %X X XXX||
+|X$X X| XXX X   X XX XXX %%  XX X|
+|XXXXX XX %X %X  XXX $X X X   X| |
+|XXXXX   XX   XX|XXX |$XX  %X X X|
+|X XX  XX XX  XXX XX|XXX   ||XX X|
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXXX|X XX$|  %| XXX  X X X%  X  |
+|XX XXXXXXXX X X XXX   XX   X X X|
+|XXXX|X  XX| X   XXX XX XX$XX XXX|
+|X |XXX  XXX   X XXX   XX  $X X|X|
+| X$XXXX X  X  |  XXXX  X XXX X  |
+|XXXX XX XX   XX  XXXX  X XXX|X  |
+|X      | XXX X  XXX| X X X|  X ||
+|XXX  XXX XX  XX$XXX| X X|X   X$$|
+| XX     X  X  X XXX $ XX   X$X%X|
+|  X X $X  XX  XX XX%XXX    |XX X|
+| XXX XXXXX %$ X  XXXXXXXX  XX  X|
+|%X X XXX  X    X %XXX |$X X XXX |
+| XXXX|    XXXXXXXXX$X$ |  X XXXX|
+|XXXX  XX||X  X XXXX X     X XXXX|
+|XXX%  XXXXX XXXXXXX  %X X %     |
+|XX  X  X  XXX X XXX|XX XX XX XXX|
+|X%XX XXXX XX  X XXX| |XX   X X|X|
+|XXX |X  XXXX %XXXX  XXXX     | X|
+|XXXX|XX X%X XXX XXX XX|XX XX XXX|
+||XX XXX  XX XXX  XXXX  X|XXX X %|
+|   XXX|X XX  X|X XX XXX|| | XX X|
+|  XX$   X  X  X  XXXX  X XXX X  |
+| X  X X XXXX|  XXXX X  $  X XXXX|
+|  XXXXXX X XX|X XXX XX XX XX|XXX|
+|%|% X X   X  X| XXX  X|X|X   X  |
+|  XX  XXXX  XXXXXXX|  X X    | %|
+|X X   X XX  XX   XXXXXXXX  XX  X|
+||X   XX| X %XX|XXXX X$ |  X XXXX|
+| XX X XXXX% X|X XXX   XX|  X$X X|
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+|XXX   XXXX   XXXXX  XXX  XXXXXXX|
+|X X    XX     XXX   XXX    XXXXX|
+|X      X       X      X     XX X|
+|                                |
+|                                |
+|                                |
+|                                |
+|                                |
+|                                |
+|                                |
+|                                |
+|                                |
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||
+||||||||||||||||||||||||||||||||||

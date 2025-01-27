@@ -1,9 +1,6 @@
 """
 ------------------------- Intro ----------------------------
 
-Terrain generator inspired and influenced by Minecraft, 
-Factorio and similar procgen games
-
 Uses initial seed to generate consistent terrain generation,
 loot, and enemy generation is random and only takes place
 in empty spaces.
@@ -11,8 +8,7 @@ in empty spaces.
 ------------------------- Logic ----------------------------
 
 The inital seed is passed through random.seed(), which uses
-math (see https://en.wikipedia.org/wiki/Mersenne_Twister
-for more) to generate a float, converted to an integer, then 
+math to generate a float, converted to an integer, then 
 string in ftd().
 
 Each random number generated is consistent 
@@ -38,10 +34,9 @@ with enough room to fight enemies and to reach the rewards
 """
 import random
 
-
 def ftd():
     """ Generate a random 16 digit string """
-    return str(int(random.random() * (10**16)))
+    return "{:016d}".format(int(random.random() * (10**16)))
 
 
 # Call ftd twice to generate 32 digit string
@@ -56,7 +51,7 @@ def terrainmap(init_seed: int, num_rows) -> list:
 
     col_data = []
     row_last = rowdata(init_seed)
-    space = '|' # represents an unbreakable chunk
+    space = '|' # represents an unbreakable chunk/border
     dirt = 'X'
     gold = '$'
     enemy = '%'
@@ -73,11 +68,11 @@ def terrainmap(init_seed: int, num_rows) -> list:
         new_row = ""
         for char in row:
             cell = int(char)
-            if cell in [2,3,4,5,6,7]: # block odds
+            if cell in [2,3,4,5,6]: # block odds
                 new_row += dirt
             else:
                  # a bit of unscripted RNG for objects and enemies
-                object = random.randrange(30)
+                object = random.randrange(25)
                 # Rewards
                 if object == 1:
                     # Gold won't spawn beside or below other gold
@@ -104,22 +99,37 @@ def terrainmap(init_seed: int, num_rows) -> list:
 
     col_data.insert(0, x)
 
-    for i in range(9): # open space at spawn level
+    """------------------------ Level Design ------------------------"""
+    cavern_ceiling = [
+            "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|",
+            "|XXX   XXXX   XXXXX  XXX  XXXXXXX|",
+            "|X X    XX     XXX   XXX    XXXXX|",
+            "|X      X       X      X     XX X|",
+            ]
+
+    """----------------------- Spawn Chamber ------------------------"""
+    for i in range(4): # open space at spawn level
         col_data.insert(0, logo)
 
-    for i in range(3): # final 3 rows filled in before boss
+    col_data.insert(0, (space+ 'X'*6 + ' '*18+ '%'+' '+ 'X'*6+space))
+
+    for i in range(4): # open space at spawn level
+        col_data.insert(0, logo)
+    
+    for i in range(3):
         col_data.insert(0, x) # spawn ceiling
-        col_data.insert
-        col_data.append(x) # 
+    """------------------------ Boss Chamber ------------------------"""
+
+    for i in range(len(cavern_ceiling)):
+        col_data.append(cavern_ceiling[i])
+
+    for i in range(9):
+        col_data.append(o)
+    
+    for i in range(12):
+        col_data.append('|'*34)
+
+    for i in col_data:
+        print(i)
 
     return col_data
-
-"""-------------------------Debug/Testing-----------------------------"""
-seed = random.random() # set seed to random
-map_data = terrainmap(seed, 100) # store map data as map_data
-
-# print in terminal
-for i in map_data:
-    print(i)
-
-"""-------------------------------------------------------------------"""

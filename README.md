@@ -1,6 +1,15 @@
 # CaveGame2D
 My first attempt at game development. The game is written entirely using python's Pygame package.
 
+# Instructions to Run (main)
+
+Install Pygame
+```bash
+python -m pip install pygame
+```
+
+
+
 # Features
 - Randomly generated levels
 - Distance-activated enemy AI

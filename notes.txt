@@ -26,3 +26,14 @@ leveling system:
     level 3: faster walk
     level 4: more health
     level 5: even higher jump
+
+Image Optimization:
+    Initializing things like health, score, points etc
+    and only updating when flag is triggered vs rendering
+    every frame
+
+Enemy AI:
+    use distance formula and if distance is within range, make entities move
+    towards player - jump if they hit wall
+
+    Draw lines in general direction: < and if player in cone shape approach

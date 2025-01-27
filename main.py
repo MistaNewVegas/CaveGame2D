@@ -5,9 +5,9 @@ import terrain_data_generator
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
-MAX_FALL_SPEED = 20
 
 """------------------------------------------------ Supp Formulas ------------------------------------------------"""
+
 def distance(x1: int, y1: int, x2: int, y2: int) -> int:
     """ Calc squared distance between two points """
     try: return (x2 - x1) ** 2 + (y2 - y1) ** 2
@@ -20,10 +20,13 @@ def roundeddiv(x: int, y: int) -> int:
     try: return round(x/y)
     except: pass
 
+# 1 Unit of measurement, each tile is gcxgc
+gridchunk = roundeddiv(SCREEN_WIDTH, 33)
+
 """------------------------------------------------ Entities ------------------------------------------------"""
 
 class Entity(pygame.sprite.Sprite):
-
+    """ Anything that has gravity and collisions, Pretty much """
     def __init__(self):
         super().__init__()
         self.gravity = 1
@@ -31,10 +34,13 @@ class Entity(pygame.sprite.Sprite):
         # self.max_vy
         self.velocity_x = 0
 
+        # flags
         self.onground = False
         self.jumping = False
         self.frozen = False
         self.reflectx = False
+
+        self.MAX_FALL_SPEED = 20
 
     def update(self, chunks):
         """ Apply gravity, check collisions """
@@ -43,7 +49,7 @@ class Entity(pygame.sprite.Sprite):
             self.rect.y += self.velocity_y
             self.velocity_y += self.gravity
 
-        # OR gate for simple/fast collision detection
+        # Simple collision flags (or)
         self.vertcol = False
         self.horcol = False
         self.collision_detected = self.vertcol or self.horcol
@@ -56,6 +62,9 @@ class Entity(pygame.sprite.Sprite):
                     self.check_collision_hori(chunk)
             else:
                 break
+
+            if isinstance(self, Enemy):
+                self.dojump = True
 
     def check_collision_vert(self, sprite):
         """ Vertical Collisions """
@@ -94,11 +103,7 @@ class Entity(pygame.sprite.Sprite):
                 self.rect.x += overlap
                 self.horcol = True
                 self.reflectx = True
-        else:
-            self.onground = False
 
-
-gridchunk = roundeddiv(SCREEN_WIDTH, 33)
 
 class Player(Entity):
 
@@ -121,7 +126,7 @@ class Player(Entity):
 
         self.health = 100
         self.score = 0
-        self.level = 4
+        self.level = 0
 
         print("Player Spawned")
         self.vertcol = False
@@ -132,38 +137,15 @@ class Player(Entity):
         self.takedamage = False
         self.damagetaken = 0
 
+        self.score_needed = 100
         self.levelup_message_duration = None
         self.levelupdisplay = False
         self.levelupmsg = ''
 
     def update(self, chunks, timedelta):
 
-        # level check --- POWERUPS!!!
-        self.score_needed = 100*(2**self.level) - self.score
-
         if self.score_needed <= 0:
-            self.level += 1
-            self.levelup_start_time = pygame.time.get_ticks()
-            self.levelup_message_duration = 2000
-            self.levelupdisplay = True
-
-            print("level up")
-            if self.level == 1:
-                self.levelupmsg = ' 2x Jump Height!'
-                self.jumpheight = -15
-            elif self.level == 2:
-                self.levelupmsg = ' +50HP'
-                self.health += 50
-            elif self.level == 3:
-                self.levelupmsg = ' 2x Speed!'
-                self.speed = self.speed * 2
-            elif self.level == 4:
-                self.levelupmsg = ' Sticky Bombs!'
-
-            elif self.level == 5:
-                self.levelupmsg = ' 1.5x Jump Height'
-                self.jumpheight = self.jumpheight * 1.5
-
+            self.levelup()
 
         self.damagecooldown -= timedelta
         # Get the state of all keyboard keys
@@ -226,6 +208,35 @@ class Player(Entity):
 
             else:
                 break  # Break if a collision is detected
+
+    def levelup(self):
+        """ Level up and assign gained attributes """
+        # level check 100*2**level [100, 200, 400, 800, 1600, etc]
+        self.score_needed = 100*(2**self.level) - self.score
+
+        if self.score_needed <= 0:
+            self.level += 1
+            self.levelup_start_time = pygame.time.get_ticks()
+            self.levelup_message_duration = 2000
+            self.levelupdisplay = True
+
+            print("level up")
+            if self.level == 1:
+                self.levelupmsg = ' 2x Jump Height!'
+                self.jumpheight = -15
+            elif self.level == 2:
+                self.levelupmsg = ' +50HP'
+                self.health += 50
+            elif self.level == 3:
+                self.levelupmsg = ' 2x Speed!'
+                self.speed = self.speed * 2
+            elif self.level == 4:
+                self.levelupmsg = ' Sticky Bombs!'
+
+            elif self.level == 5:
+                self.levelupmsg = ' 1.5x Jump Height'
+                self.jumpheight = self.jumpheight * 1.5
+        
         
 class Bomb(Entity):
 
@@ -331,36 +342,62 @@ class Enemy(Entity):
         self.rect.y = y*roundeddiv(SCREEN_WIDTH, 34)
 
         self.randomjump = None
-        self.speed = 3
-        self.jumpheight = -5
+        self.dojump = False
+        self.speed = 1.4
+        self.jumpheight = -10 # same as base player
 
         self.velocity_x = 2
 
         self.health = 10
         self.worth = 200
 
+        self.player_in_range = False
         self.iskill = False
 
     def update(self, chunks, player):
 
+        # gravity, check collisions return self.dojump if horizontal collision detected
         Entity.update(self, chunks)
-        random.seed(None)
-        self.randomjump = random.choice([True, False])
 
-        if self.randomjump and not self.jumping and self.onground:
+        if distance(self.rect.x, self.rect.y, player.rect.x, player.rect.y) < SCREEN_WIDTH/6:
+            self.seek(player)
+            print("seeking, distance: ", abs(self.rect.x - player.rect.x))
+        else:
+            self.wander()
+
+        if self.dojump and not self.jumping and self.onground: # try to jump over obstacles
             self.velocity_y = self.jumpheight
-
+            self.dojump = False
 
         if self.reflectx:
             self.velocity_x = -self.velocity_x
 
-        self.rect.x += self.velocity_x
+        self.rect.x += self.velocity_x*self.speed # apply final calculations
 
         self.reflectx = False
 
+    def seek(self, player):
+        """ Logic for chasing player if in range """
+        if self.rect.y - gridchunk*5 < player.rect.y < self.rect.y + gridchunk*5: # if/onlyif within y range
+            if self.rect.x < player.rect.x and self.velocity_x < 0: # <enemy> [player]
+                self.reflectx = True
+            elif self.rect.x > player.rect.x and self.velocity_x > 0: # [player] <enemy>
+                self.reflectx = True 
 
 
-    pass
+    def wander(self):
+        """ Logic (antilogic) for wandering """
+        random_movement = random.randrange(100) # lottery
+        match random_movement:
+            case 1:
+                self.reflectx = True
+            case 2:
+                self.dojump = True
+            case 3: # do nothing for 5 seconds
+                pass
+            
+
+
 
 """------------------------------------------------ Chunks ------------------------------------------------"""
 class BorderChunk(pygame.sprite.Sprite):
@@ -425,7 +462,6 @@ class Game:
         self.background = pygame.image.load('assets/text/background.png').convert()
         self.background = pygame.transform.scale(self.background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-        # constants
         self.columns = 34
         self.rows = 60
 

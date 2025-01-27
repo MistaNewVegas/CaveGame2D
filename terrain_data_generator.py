@@ -1,5 +1,3 @@
-import random
-
 """
 ------------------------- Intro ----------------------------
 
@@ -38,9 +36,12 @@ is struck between enough navigatable terrain, and expansive caves,
 with enough room to fight enemies and to reach the rewards
 
 """
-# Generate a random 16 digit string
+import random
+
+
 def ftd():
-    return "{:016d}".format(int(random.random() * (10**16)))
+    """ Generate a random 16 digit string """
+    return str(int(random.random() * (10**16)))
 
 
 # Call ftd twice to generate 32 digit string
@@ -79,7 +80,7 @@ def terrainmap(init_seed: int, num_rows) -> list:
                 object = random.randrange(30)
                 # Rewards
                 if object == 1:
-                    # Gold won't spawn beside or below other gold... pretty clever, huh?
+                    # Gold won't spawn beside or below other gold
                     if new_row[-1:] and col_data[-1][len(new_row)] != gold: 
                         new_row += gold
                     else: new_row += dirt
@@ -113,9 +114,12 @@ def terrainmap(init_seed: int, num_rows) -> list:
 
     return col_data
 
-seed = random.random()
+"""-------------------------Debug/Testing-----------------------------"""
+seed = random.random() # set seed to random
+map_data = terrainmap(seed, 100) # store map data as map_data
 
-mapdata = terrainmap(seed, 100)
-
-for i in mapdata:
+# print in terminal
+for i in map_data:
     print(i)
+
+"""-------------------------------------------------------------------"""
